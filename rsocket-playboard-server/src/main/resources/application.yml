@@ -3,11 +3,16 @@ logging:
     org.springframework: INFO
   file:
     path: ./logs/${spring.application.name}
-
+server:
+  port: 8080
 spring:
+  webflux:
+    date-format: "yyyy-MM-dd HH:mm:ss"
   rsocket:
     server:
-      port: 9999
+      port: 9090
+      transport: websocket
+      mapping-path: /rsocket
   application:
     name: rsocket-playboard-server
   datasource:
