@@ -11,10 +11,10 @@
 
     <groupId>pro.chengganng</groupId>
     <artifactId>rsocket-playboard-web</artifactId>
-
     <version>1.0.0-SNAPSHOT</version>
-    <name>rsocket-playboard-web</name>
+    <packaging>pom</packaging>
 
+    <name>rsocket-playboard-web</name>
     <description>Demo project for Rsocket Web</description>
 
     <build>
