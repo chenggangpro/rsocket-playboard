@@ -1,35 +1,31 @@
 logging:
   level:
     org.springframework: INFO
+    org.springframework.data.r2dbc: DEBUG,
+    io.rsocket: DEBUG
   file:
     path: ./logs/${spring.application.name}
 server:
-  port: 8080
+  port: 9900
 spring:
   webflux:
     date-format: "yyyy-MM-dd HH:mm:ss"
   rsocket:
     server:
-      port: 9090
+      port: 9901
       transport: websocket
       mapping-path: /rsocket
   application:
     name: rsocket-playboard-server
-  datasource:
+  r2dbc:
     name: rsocket-playboard-db-${spring.profiles.active}
     username: h2
     password: 123123
-    type: org.h2.jdbcx.JdbcDataSource
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:playboard-db
-    hikari:
-      connection-test-query: select 1 FROM DUAL
-      connection-timeout: 10000
-      idle-timeout: 30000
-      max-lifetime: 60000
-      maximum-pool-size: 1000
-      minimum-idle: 5
-      validation-timeout: 5000
+    url: r2dbc:h2:mem:///playboard-db?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    pool:
+      initial-size: 5
+      max-size: 500
+      validation-query: SELECT 1 FROM DUAL
   jackson:
     locale: zh_CN
     time-zone: "Asia/Shanghai"
